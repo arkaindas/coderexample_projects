@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>Reacting with react.js</title>
+	<link  href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<div class="container" id="container"></div>
+</body>
+	<script src="bower_components/react/react.js"></script>
+	<script src="bower_components/react/JSXTransformer.js"></script>
+	    <script type="text/jsx">
+        /** @jsx React.DOM */
+
+        var PostTitle = React.createClass({
+            render: function() {
+                return (
+                        <li className="list-group-item">{this.props.post.title}</li>
+                );
+            }
+        });
+
+        var BlogList = React.createClass({
+            render: function() {
+              var props = this.props;
+              var rows = props.posts
+                .filter(function(post){
+                  return post.title.toLowerCase().indexOf(props.filterText.toLowerCase()) > -1;
+                })
+                .map(function(post){
+                  return <PostTitle key={post.title} post={post} />;
+                });
+
+              return (
+                  <ul className="list-group">{rows}</ul>
+              );
+            }
+        });
+
+        var SearchBox = React.createClass({
+            handleChange: function() {
+                this.props.onUserInput(
+                    this.refs.filterTextInput.getDOMNode().value
+                );
+            },
+            render: function() {
+                return (
+		        <div className="form-group">
+				<input ref="filterTextInput" value={this.props.filterText} onChange={this.handleChange} type="search" className="form-control" placeholder="Search for post" />
+			</div>
+                );
+            }
+        });
+
+        var BlogContainer = React.createClass({
+            getInitialState: function() {
+                return {
+                    filterText: ''
+                };
+            },
+
+            handleUserInput: function(filterText) {
+                this.setState({
+                    filterText: filterText
+                });
+            },
+
+            render: function() {
+                return (
+			<div className="row">
+				<h2>CoderExample Blog List</h2>
+				 <SearchBox onUserInput={this.handleUserInput} filterText={this.state.filterText} />
+				<ul className="list-group">
+					<BlogList filterText={this.state.filterText} posts={this.props.posts} />
+				</ul>
+			</div>
+                );
+            }
+        });
+	
+          var posts = [{
+              title : "What’s New in Bootstrap 4",
+          },{
+              title : "Frontend package and dependency management with Bower",
+          },{
+              title : "RESTful API in Lumen, A Laravel Micro Framework",
+          },{
+              title : "DataTable demo (Server side) in Php,Mysql and Ajax",
+          },{
+              title : "What a web developer needs to know about http/2?",
+          },{
+              title : "Composer easy tutorial - php dependency management tool",
+          },{
+              title : "Parallax Behind The Scene",
+          }
+        ];
+
+        React.render(<BlogContainer posts={posts} />, document.getElementById('container'));
+
+        </script>
+</html>   
+    

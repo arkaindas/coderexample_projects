@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+		<title>Copy to Clipboard in pure javascript</title>
+		<meta name="description" content="Copy to Clipboard in pure javascript" />
+		<meta name="author" content="Arkaprava Majumder" />
+		<!-- bootstrap css -->
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+
+
+    </head>
+    <body>
+		<div class="nav-top clearfix">
+			<span class="left"><a  title="CoderExample" href="http://coderexample.com/" ><span> <i class="lh1 fa fa-angle-left"></i>CODER<i class="lh1 fa fa-angle-right"></i><i class="lh1 fa fa-angle-left"></i>/EXAMPLE<i class="lh1 fa fa-angle-right"></i></span></a></span>
+			
+			<span class="left"><a target="_blank" rel="nofollow" href="https://www.facebook.com/sharer/sharer.php?u=http://coderexample.com/copy-to-clipboard-in-pure-javascript/" title="Share on Facebook" ><span> <i class="lh1 fa fa-facebook"></i></span></a></span>
+			
+			<span class="left"><a target="_blank" rel="nofollow" href="https://twitter.com/intent/tweet?url=http://coderexample.com/copy-to-clipboard-in-pure-javascript/&text=Copy to Clipboard in pure javascript&via=coderexample" title="Share on  Twitter" ><span> <i class="lh1 fa fa-twitter"></i></a></span>
+			
+			<span class="right"><a  href="http://coderexample.com/copy-to-clipboard-in-pure-javascript/"><i class="lh1 fa fa-arrow-left"></i> <span class="header-nav">Back to Tutorial Article</span></a></span>
+		</div>
+        <div class="container">
+			<div class="header">
+				<h1>Copy to Clipboard in pure javascript</h1>	
+			</div>
+			<div class="main">
+				<div class="item row">
+				  <span class="copy-area">Hello You can copy this area.</span><button class="btn-copy">Copy to clipboard</button>
+				</div>
+				 
+				<div class="item row">
+				  <textarea rows="10" cols="25" class="copy-area">Hello You can type anything copy the text.</textarea>
+				  <button class="btn-copy">Copy to clipboard</button>
+				</div>	
+			</div>
+        </div>
+		<div class="footer-area clearfix">
+			Made with ♡ in India ©2016
+			<a href="http://coderexample.com/" title="CoderExample"> CoderExample</a>
+		</div>
+		<!-- copy to clipboard js-->
+		<script type="text/javascript">
+			var items = document.querySelectorAll('.item'), i;   //selecting all container has class .item
+
+			for (i = 0; i < items.length; ++i) {  // loop through each item and calling copyToClipBoard  function
+			  copyToClipBoard(items[i]);
+			}
+
+			function copyToClipBoard(item) {
+			  var btnCopy = item.querySelector('.btn-copy');   // selecting copy button for this item
+			  btnCopy.addEventListener('click', function(event) {  // attaching click event
+				var copyArea = item.querySelector('.copy-area');  // selecting copy area for this item
+				var range = document.createRange();  
+				range.selectNode(copyArea);  
+				window.getSelection().addRange(range);  // select the text
+
+
+				try {  
+				  // execute the copy command  on selected the text in copy area
+				  var copyStatus = document.execCommand('copy');  
+				  var msg = copyStatus ? 'copied' : 'failed';  
+				  console.log(msg);  // console the copy status
+				} catch(error) {  
+				  console.log('Oops!, unable to copy');  
+				}  
+
+				window.getSelection().removeAllRanges();  // remove the selection
+			  });
+			}
+
+
+
+		</script>
+    </body>
+</html>

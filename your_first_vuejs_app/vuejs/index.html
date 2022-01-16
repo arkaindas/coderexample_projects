@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>Your First VueJS App</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container" id="container">
+		<div class="row">
+			<h2>CoderExample Vue.Js Example</h2>
+			<div class="form-group">
+				<label>Your monthly salary:</label>
+				<input  type="number"  class="form-control"  placeholder="Enter your monthly salary..."  v-model="salary"  v-on="blur:showAlert" />
+				<p class="help-block" v-if="salary">Your Annual salary:{{salary*12}}</p>
+			</div>
+		</div>
+	</div>
+</body>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/vue/0.12.16/vue.min.js"></script>
+	<script src="js/app.js"></script>
+</html>   
+    
