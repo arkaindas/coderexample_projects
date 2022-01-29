@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Image Detection</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@1.0.0"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <div class="file-upload">
+      <h1>Image Detection</h1>
+      <h4>through Machine Learning Models Using Tensorflow.js</h4>
+      <button
+        class="file-upload-btn"
+        type="button"
+        onclick="$('.file-upload-input').trigger( 'click' )"
+      >
+        Add Image
+      </button>
+
+      <div class="image-upload-wrap">
+        <input
+          class="file-upload-input"
+          type="file"
+          onchange="readURL(this);"
+          accept="image/*"
+        />
+        <div class="drag-text">
+          <h3>Drag and drop or select a Image</h3>
+        </div>
+      </div>
+      <div class="file-upload-content">
+        <img class="file-upload-image" src="#" alt="your image" id="preview" />
+        <div class="image-title-wrap">
+          <button type="button" onclick="removeUpload()" class="remove-image">
+            Remove <span class="image-title">Uploaded Image</span>
+          </button>
+        </div>
+        <section class="prediction-section">
+          <h2>Prediction:</h2>
+          <p class="status"></p>
+        </section>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
